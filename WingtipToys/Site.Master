@@ -50,12 +50,14 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
+
+                        <%--routing via links from tilda/root directory--%>
                         <li><a runat="server" href="~/">Home</a></li>
                         <li><a runat="server" href="~/About">About</a></li>
                         <li><a runat="server" href="~/Contact">Contact</a></li>
                         <li><a runat="server" href="~/ProductList">Products</a></li>
                     </ul>
-
+                    <%--view state (state-preservation) disabled for anonymous users?--%>
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
                         <AnonymousTemplate>
                             <ul class="nav navbar-nav navbar-right">
@@ -81,13 +83,17 @@
             </a>  
             <br />  
         </div>
+        <%--these links are always rendered, as they're part of site.master--%>
         <div id="CategoryMenu" style="text-align: center">       
+            <%--listview model-binding (type of data-binding) control below allows via ItemType, a data-binding keyword, the display of different categories from database. The type is derived from the model and made accessible to the page via GetCategories method, which is defined in the code behind --%>
             <asp:ListView ID="categoryList"  
                 ItemType="WingtipToys.Models.Category" 
                 runat="server"
                 SelectMethod="GetCategories" >
+                <%--ItemTemplate is a property on ListView, specifies the display format of items in a collection--%>
                 <ItemTemplate>
                     <b style="font-size: large; font-style: normal">
+                        <%--linking here to product detail page via URL bound to product Id--%>
                         <a href="/ProductList.aspx?id=<%#: Item.CategoryID %>">
                         <%#: Item.CategoryName %>
                         </a>
@@ -96,7 +102,7 @@
                 <ItemSeparatorTemplate>  |  </ItemSeparatorTemplate>
             </asp:ListView>
         </div>
-
+        <%--the below code, asp:ContentPlaceholder, allows something comparable to ng-view in Angular: injection of a partial, in this case, the default content--%>
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>

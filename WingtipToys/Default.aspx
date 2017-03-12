@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="WingtipToys._Default" %>
-
+<%--below code is called by site.master's content placeholder--%>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
         <h1><%: Title %>.</h1>
         <h2>Wingtip Toys can help you find the perfect gift.</h2>
